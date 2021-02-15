@@ -7,6 +7,8 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class LoginBtnComponent implements OnInit {
 
+  currentUser = null;
+
   constructor(
     public auth: AuthService
   ) { }
@@ -15,8 +17,9 @@ export class LoginBtnComponent implements OnInit {
   }
 
   loginWithRedirect(): void {
-    this.auth.loginWithRedirect();
+     this.auth.loginWithRedirect();
   }
+
   logout(): void {
     this.auth.logout();
   }

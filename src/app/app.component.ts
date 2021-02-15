@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginService } from './services/login.service';
+import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,14 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
   title = 'client';
+
+  constructor(
+    public auth: AuthService
+  ) {
+    this.auth.user$.subscribe((user) => {
+      if (!user) {
+        this.auth.loginWithRedirect();
+      }
+    })
+  }
 }
