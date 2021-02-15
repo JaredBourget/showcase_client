@@ -1,1 +1,16 @@
-<p>store-page works!</p>
+<div class='container-fluid'>
+  <title>Store Page</title>
+  <h1>Store Page</h1>
+  <div class='row storeRow'>
+    <div *ngFor='let product of testProducts' class='col-6 col-sm-6 col-md-4 col-lg-3 productCard'>
+      <div class='card'>
+        <div class='card-body'>
+          <h5 class='card-title'>{{product.name}}</h5>
+          <p class='card-text'>Bike: {{product.id}}</p>
+          <span class='card-text'>{{product.price | currency}}</span>
+        </div>
+        <img class='card-img-bot productImage' src='{{product.imageURL}}' alt='Card image cap'>
+      </div>
+    </div>
+  </div>
+</div>

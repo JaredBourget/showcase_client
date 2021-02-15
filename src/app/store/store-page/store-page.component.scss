@@ -1,0 +1,11 @@
+.storeRow {
+  margin: 0;
+  .productCard {
+    padding: 0 0.5rem;
+    margin-bottom: 1rem;
+    .productImage {
+      max-width: 300px;
+      max-height: 300px;
+    }
+  }
+}
