@@ -8,33 +8,42 @@ import {
   HttpErrorResponse
 } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators'
+import { Observable, of } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class BackendService implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler):
-    Observable<HttpEvent<any>> {
-    const token: string = localStorage.getItem('token') || '';
-    // if (token) {
-      req = req.clone({ headers: req.headers.set('Authorization', 'Bearer ' + token) });
-    // }
-
-    if (!req.headers.has('Content-Type')) {
-      req = req.clone({ headers: req.headers.set('Content-Type', 'application/json') });
-    }
-
-    req = req.clone({ headers: req.headers.set('Accept', 'application/json') });
-    console.log('request:', req)
+  constructor(public toasterService: ToastrService) { }
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
 
     return next.handle(req).pipe(
-      map((event: HttpEvent<any>) => {
-        if (event instanceof HttpResponse) {
-          console.log('event--->>>', event);
+      tap(evt => {
+        if (evt instanceof HttpResponse) {
+          if (evt.body && evt.body.success)
+            this.toasterService.success(
+              evt.body.success.msg, 
+              evt.body.success.title, 
+              { positionClass: 'toast-bottom-center' }
+            );
         }
-        return event;
+      }),
+      catchError((err: any) => {
+        if (err instanceof HttpErrorResponse) {
+          console.log(err)
+          try {
+            this.toasterService.error(err.error.msg ? err.error.msg : 'Unauthorized', 'Error:', { positionClass: 'toast-bottom-center' });
+          } catch (e) {
+            this.toasterService.error('An error occurred', '', { positionClass: 'toast-bottom-center' });
+          }
+          //log error 
+        }
+        return of(err);
       }));
+
   }
+
 }

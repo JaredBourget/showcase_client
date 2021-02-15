@@ -8,11 +8,4 @@ import { LoginService } from './services/login.service';
 })
 export class AppComponent {
   title = 'client';
-  constructor(
-    public loginService: LoginService
-  ) {
-    this.loginService.getUser().subscribe(res => {
-      console.log(res)
-    })
-   }
 }
