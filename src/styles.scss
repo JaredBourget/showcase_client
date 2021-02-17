@@ -3,4 +3,8 @@
 @import "~ngx-toastr/toastr-bs4-alert.scss";
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #F5F5F5;
+ }

@@ -13,6 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { LoginBtnComponent } from './auth/login-btn/login-btn.component';
 import { NavBarComponent } from './header/nav-bar/nav-bar.component';
 import { StorePageComponent } from './store/store-page/store-page.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { StorePageComponent } from './store/store-page/store-page.component';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
     ToastrModule.forRoot(),
     AuthModule.forRoot({
       ...env.auth,

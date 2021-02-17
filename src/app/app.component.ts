@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '@auth0/auth0-angular';
+import { CurrentService } from './services/current.service';
 
 @Component({
   selector: 'app-root',
@@ -10,12 +11,11 @@ export class AppComponent {
   title = 'client';
 
   constructor(
-    public auth: AuthService
+    public auth: AuthService,
+    public curr: CurrentService
   ) {
     this.auth.user$.subscribe((user) => {
-      if (!user) {
-        this.auth.loginWithRedirect();
-      }
+      user ? this.curr.setCurrentUser(user) : this.auth.loginWithRedirect();
     })
   }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrentService } from '../../services/current.service';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavBarComponent implements OnInit {
 
-  constructor() { }
+  shoppingCart = faShoppingCart;
+
+  cart: number = 0;
+
+  user: any
+
+  constructor(
+    public curr: CurrentService
+  ) { }
 
   ngOnInit(): void {
+    this.curr.getCurrentUser().subscribe((currUser) => {
+      this.user = currUser;
+      console.log(this.user)
+    })
+    this.curr.getCurrentCart().subscribe((currentCart) => {
+      this.cart = currentCart.length;
+    })
   }
 
 }

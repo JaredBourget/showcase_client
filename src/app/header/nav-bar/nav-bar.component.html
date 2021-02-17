@@ -1,9 +1,14 @@
 <nav class='navbar navbar-dark bg-dark'>
   <div class='container-fluid'>
-    <a class='navbar-brand' href='#'>Navbar</a>
+    <span class='navbar-brand' >Hi, {{user.given_name}}</span>
       <ul class='navbar-nav nav-container'>
         <li class='nav-item'>
-          <a class='nav-link active' aria-current='page' href='#'>Home</a>
+          <a class='nav-link active storeLink' aria-current='page' href='store'>Store</a>
+        </li>
+        <li class='nav-item'>
+          <fa-icon [icon]='shoppingCart' 
+          [styles]="{'color': 'white', 'width': '1.3rem', 'height': '1.3rem', 'margin-top': '0.3rem'}"></fa-icon>
+          <span *ngIf='cart' class='badge cartBadge'>( {{cart}} )</span>
         </li>
         <li class='nav-item login-btn'>
           <app-login-btn></app-login-btn>
