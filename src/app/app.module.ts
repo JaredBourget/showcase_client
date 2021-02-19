@@ -7,7 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BackendService } from './services/backend.service';
-import { LoginService } from './services/login.service';
+import { UserService } from './services/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { LoginBtnComponent } from './auth/login-btn/login-btn.component';
@@ -35,7 +35,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BackendService, multi: true },
-    LoginService,
+    UserService,
   ],
   bootstrap: [AppComponent],
 })
